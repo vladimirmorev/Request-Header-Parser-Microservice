@@ -7,9 +7,10 @@ var port = process.env.PORT || 8080;
 
 app.get('/', function (req, res) {
   var clientIp = requestIp.getClientIp(req);
-  var clientLanguage = req.acceptsLanguages()[0];
-  console.log(clientLanguage);
-  var obj = {"ipaddress":clientIp,"language":clientLanguage,"software":null};
+  var clientLanguage = req.acceptsLanguages()[0];  
+  var clientOs = req.headers['user-agent'].split(') ')[0].split(' (')[1]
+  
+  var obj = {"ipaddress":clientIp,"language":clientLanguage,"software":clientOs};
   res.json(obj);
 });
 
