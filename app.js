@@ -1,11 +1,13 @@
 var express = require('express');
+var requestIp = require('request-ip');
 
 var app = express();
 
 var port = process.env.PORT || 8080;
 
 app.get('/', function (req, res) {
-  var obj = {};
+  var clientIp = requestIp.getClientIp(req);
+  var obj = {"ipaddress":clientIp,"language":null,"software":null};
   res.json(obj);
 });
 
